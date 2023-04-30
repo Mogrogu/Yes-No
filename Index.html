@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="Baby-Yoda.png">
+	<style>
+		body {
+			background-color: black;
+			background-image: url(Background.jpg);
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center center;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100%;
+		}
+
+		#image {
+			margin-top: 20px;
+			margin-bottom: 50px;
+			width: 80%;
+			max-width: 500px;
+			height: auto;
+			display: block;
+		}
+
+		.btn {
+			display: inline-block;
+			background-color: #00CC66;
+			color: #fff;
+			font-size: 24px;
+			border: none;
+			border-radius: 50%;
+			width: 150px;
+			height: 150px;
+			margin: 25px 10px;
+			text-align: center;
+			line-height: 150px;
+			box-shadow: 0px 5px 0px #00663c;
+			cursor: pointer;
+			transition: all 0.2s ease-in-out;
+		}
+
+		#no-btn {
+			background-color: #FF3300;
+			box-shadow: 0px 5px 0px #660000;
+		}
+
+		 .btn:active {
+			transform: translateY(5px);
+			box-shadow: 0px 2px 0px #00663c;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<img id="image" src="Baby-Yoda.png" alt="Baby Yoda image">
+		<div>
+			<button class="btn" id="yes-btn">Yes</button>
+			<button class="btn" id="no-btn">No</button>
+		</div>
+	</div>
+
+	<script>
+		const yesBtn = document.getElementById('yes-btn');
+		const noBtn = document.getElementById('no-btn');
+
+		function speak(text) {
+			const synth = window.speechSynthesis;
+			const utterance = new SpeechSynthesisUtterance(text);
+			synth.speak(utterance);
+		}
+
+		yesBtn.addEventListener('click', () => {
+			speak('Yes');
+		});
+
+		noBtn.addEventListener('click', () => {
+			speak('No');
+		});
+	</script>
+</body>
+<div style="position: absolute; bottom: 10px; right: 10px; color: white; font-size: 12px;">
+  AM &#x2764;&#xFE0F; BML
+</div>
+</html>
