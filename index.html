@@ -76,6 +76,18 @@
       transform: translateY(5px);
       box-shadow: 0px 2px 0px #00663c;
     }
+    @keyframes bounce {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.02);
+      }
+      100% {
+        transform: scale(1);
+  }
+}
+
   </style>
 </head>
 <body>
@@ -97,6 +109,7 @@
       const synth = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(text);
       synth.speak(utterance);
+      bounceImage();
     }
 
     function getRandomYesNo() {
@@ -104,6 +117,13 @@
       const randomIndex = Math.floor(Math.random() * options.length);
       return options[randomIndex];
     }
+    function bounceImage() {
+  const image = document.getElementById('image');
+  image.style.animation = 'none'; // reset animation
+  void image.offsetWidth; // trigger reflow to restart animation
+  image.style.animation = 'bounce 0.2s';
+}
+
 
     yesBtn.addEventListener('click', () => {
       speak('Yes');
