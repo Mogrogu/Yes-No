@@ -90,6 +90,20 @@
         transform: scale(1);
       }
     }
+
+    .faded-text {
+      font-family: 'Star Jedi', arial;
+      font-size: 50px;
+      color: white;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none; /* Prevent interfering with clicks */
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
   </style>
 </head>
 <body>
@@ -128,17 +142,41 @@
       image.style.animation = 'bounce 0.2s';
     }
 
+    function displayFadedText(text) {
+      // Check if faded-text element already exists; if so, remove it
+      let fadedTextElement = document.querySelector('.faded-text');
+      if (!fadedTextElement) {
+        fadedTextElement = document.createElement('div');
+        fadedTextElement.className = 'faded-text';
+        document.body.appendChild(fadedTextElement);
+      }
+
+      // Set text content and style
+      fadedTextElement.textContent = text;
+
+      // Trigger fade-in
+      fadedTextElement.style.opacity = '1';
+
+      // Fade out after 2 seconds
+      setTimeout(() => {
+        fadedTextElement.style.opacity = '0';
+      }, 2000);
+    }
+
     yesBtn.addEventListener('click', () => {
       speak('Yes');
+      displayFadedText('Yes');
     });
 
     noBtn.addEventListener('click', () => {
       speak('No');
+      displayFadedText('No');
     });
 
     randomBtn.addEventListener('click', () => {
       const randomYesNo = getRandomYesNo();
       speak(randomYesNo);
+      displayFadedText(randomYesNo);
     });
 
     // Add event listener to Baby Yoda image
