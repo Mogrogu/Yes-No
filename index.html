@@ -4,9 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="Baby-Yoda.png">
   
-                
   <style>
-
     @font-face {
       font-family: 'Star Jedi';
       src: url('star-jedi.ttf');
@@ -36,6 +34,7 @@
       max-width: 500px;
       height: auto;
       display: block;
+      cursor: pointer; /* Add pointer cursor to indicate it's clickable */
     }
 
     .btn {
@@ -50,7 +49,6 @@
       width: 150px;
       height: 150px;
       margin: 25px 10px;
-     
       box-shadow: 0px 5px 0px #00663c;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
@@ -63,27 +61,24 @@
 
     #random-btn {
       background-color: rgba(255, 145, 0, 0.705);
-	  box-shadow: 0px 5px 0px #664600;
-	  margin-top: -5px;
+      box-shadow: 0px 5px 0px #664600;
+      margin-top: -5px;
       margin-bottom: -60px;
       font-family: 'Star Jedi', arial;
       border-radius: 20% / 65%;
-	  font-size: 22px;
-    text-align: center;
-	  color: #ffffff;
+      font-size: 22px;
+      text-align: center;
+      color: #ffffff;
       width: 200px;
       height: 60px;
       line-height: 22px;
-      
-     
-      
-      
     }
 
     .btn:active {
       transform: translateY(5px);
       box-shadow: 0px 2px 0px #00663c;
     }
+
     @keyframes bounce {
       0% {
         transform: scale(1);
@@ -93,9 +88,8 @@
       }
       100% {
         transform: scale(1);
-  }
-}
-
+      }
+    }
   </style>
 </head>
 <body>
@@ -112,6 +106,7 @@
     const yesBtn = document.getElementById('yes-btn');
     const noBtn = document.getElementById('no-btn');
     const randomBtn = document.getElementById('random-btn');
+    const image = document.getElementById('image');
 
     function speak(text) {
       const synth = window.speechSynthesis;
@@ -125,13 +120,13 @@
       const randomIndex = Math.floor(Math.random() * options.length);
       return options[randomIndex];
     }
-    function bounceImage() {
-  const image = document.getElementById('image');
-  image.style.animation = 'none'; // reset animation
-  void image.offsetWidth; // trigger reflow to restart animation
-  image.style.animation = 'bounce 0.2s';
-}
 
+    function bounceImage() {
+      const image = document.getElementById('image');
+      image.style.animation = 'none'; // reset animation
+      void image.offsetWidth; // trigger reflow to restart animation
+      image.style.animation = 'bounce 0.2s';
+    }
 
     yesBtn.addEventListener('click', () => {
       speak('Yes');
@@ -144,6 +139,11 @@
     randomBtn.addEventListener('click', () => {
       const randomYesNo = getRandomYesNo();
       speak(randomYesNo);
+    });
+
+    // Add event listener to Baby Yoda image
+    image.addEventListener('click', () => {
+      randomBtn.click(); // Simulate clicking the "Show me The WaY" button
     });
   </script>
 </body>
